@@ -9,12 +9,12 @@ Compilation
 
 Once cloned the repository, issue the following instructions:
 
-`mkdir build
-cd build
-cmake ..
-... solve any issues with dependencies ...
-make
-make install`
+    mkdir build
+    cd build
+    cmake ..
+    ... solve any issues with dependencies ...
+    make
+    make install
 
 Dissection
 ----------
