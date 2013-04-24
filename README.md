@@ -19,8 +19,9 @@ Once cloned the repository, issue the following instructions:
 Dissection
 ----------
 
-The plugin runs both on Ethernet and UDP. For ethernet protocol type is 0xf052,
-while for UDP port is 47000.
+The plugin runs both on Ethernet and UDP. For ethernet the protocol type is 0xf052,
+while for UDP the port is 47000. The base ports can be changed in the HCrt
+preference section.
 
 __NOTE__: These numbers are subject to change since protocol has not got a IANA
 assignment (yet).

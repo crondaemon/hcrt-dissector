@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#
+# Core tester for dissectors
+#
+# Only first packet from pcap file is used
+# Example usage: ./core_test all.pcap hcrt.tag 0x01
+#
+
+TESTED_PROTO=hcrt
+
+if [ "$1" == "" ]
+then
+    echo "Usage: $0 <pcap file> <field to check> <value>"
+    exit 1
+fi
+
+TEST=`tshark -r $1 -T fields -c 1 -E occurrence=f -e $2 $TESTED_PROTO`
+
+if [ "$TEST" != "$3" ]
+then
+    echo -e "\nTest failed on file $1, field $2. Expected value: $3, got: $TEST"
+    exit 1
+fi
+
+echo -n "."
+
+exit 0
