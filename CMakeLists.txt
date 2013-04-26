@@ -13,7 +13,7 @@
 cmake_minimum_required(VERSION 2.6)
 project(hcrt-dissector C)
 set(hcrt-dissector_VERSION_MAJOR 0)
-set(hcrt-dissector_VERSION_MINOR 0)
+set(hcrt-dissector_VERSION_MINOR 1)
 enable_testing()
 
 #select the release build type by default to get optimization flags
