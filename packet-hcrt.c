@@ -315,18 +315,25 @@ static void dissect_hcrt(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree)
     int i = 1;
     guint8 b0_first;
     guint8 tag;
+    guint adl;
 
     /* Save byte 0 of first message. Will be checked against byte 0 of other messages */
     b0_first = tvb_get_guint8(tvb, 0);
 
     tag = b0_first & 0x0F;
     type = (b0_first & 0x78) >> 4;
+    adl = tvb_get_letohs(tvb, 2) & 0x0FFF;
 
     col_set_str(pinfo->cinfo, COL_PROTOCOL, "HCrt");
 
     col_clear(pinfo->cinfo, COL_INFO);
-    col_add_fstr(pinfo->cinfo, COL_INFO, "Type: %s, Tag: 0x%X",
-        val_to_str(type, hcrt_message_types, "Unknown (0x%02x)"), tag);
+    col_add_fstr(pinfo->cinfo, COL_INFO, "Type: %s, Tag: 0x%X, ADL: %u",
+        val_to_str(type, hcrt_message_types, "Unknown (0x%02x)"), tag, adl);
+
+    if (adl == 1 && (type == HCRT_READ || type == HCRT_WRITE)) {
+      col_append_fstr(pinfo->cinfo, COL_INFO, ", Address: 0x%.8X, Data: 0x%.8X",
+        tvb_get_letohl(tvb, 4), tvb_get_letohl(tvb, 8));
+    }
 
     if (tree) {
         offset = 0;
