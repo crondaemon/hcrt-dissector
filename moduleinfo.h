@@ -5,4 +5,4 @@
 #ifdef VERSION
 #undef VERSION
 #endif
-#define VERSION "0.1"
+#define VERSION "0.1.1"
