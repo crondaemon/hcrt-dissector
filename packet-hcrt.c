@@ -330,9 +330,13 @@ static void dissect_hcrt(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree)
     col_add_fstr(pinfo->cinfo, COL_INFO, "Type: %s, Tag: 0x%X, ADL: %u",
         val_to_str(type, hcrt_message_types, "Unknown (0x%02x)"), tag, adl);
 
-    if (adl == 1 && (type == HCRT_READ || type == HCRT_WRITE)) {
-      col_append_fstr(pinfo->cinfo, COL_INFO, ", Address: 0x%.8X, Data: 0x%.8X",
-        tvb_get_letohl(tvb, 4), tvb_get_letohl(tvb, 8));
+    if (adl == 1) {
+        if (type == HCRT_READ || type == HCRT_WRITE) {
+            col_append_fstr(pinfo->cinfo, COL_INFO, ", Address: 0x%.8X", tvb_get_letohl(tvb, 4));
+        }
+        if (type == HCRT_WRITE) {
+            col_append_fstr(pinfo->cinfo, COL_INFO, ", Data: 0x%.8X", tvb_get_letohl(tvb, 8));
+        }
     }
 
     if (tree) {
