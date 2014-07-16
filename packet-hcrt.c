@@ -4,8 +4,6 @@
  *
  * Copyright 2013 Dario Lombardo (lomato@gmail.com)
  *
- * $Id: packet-hcrt.c 48636 2013-03-29 02:46:06Z eapache $
- *
  * Wireshark - Network traffic analyzer
  * By Gerald Combs <gerald@wireshark.org>
  * Copyright 1998 Gerald Combs
